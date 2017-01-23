@@ -1,0 +1,73 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>com.axway</groupId>
+  <artifactId>prodenv</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <packaging>jar</packaging>
+
+  <name>prodenv</name>
+  <url>http://maven.apache.org</url>
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+
+ <dependencies>
+		<dependency>
+			<groupId>com.github.cjnygard</groupId>
+			<artifactId>rest-maven-plugin</artifactId>
+			<version>0.1.4</version>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<plugins>
+
+			<plugin>
+				<groupId>com.github.cjnygard</groupId>
+				<artifactId>rest-maven-plugin</artifactId>
+				<version>0.1.4</version>
+				<configuration>
+					<endpoint>http://localhost:8081/artifactory/Optum/Bank/</endpoint>
+					<resource>prod_gateway_${buildNo}.fed</resource>
+					<method>GET</method>
+					<outputDir>${project.build.directory}/alternateLocation</outputDir>
+					<outputFilename>prod_gateway_${buildNo}.fed</outputFilename>
+				</configuration>
+				<executions>
+					<execution>
+					<phase>install</phase>
+						<goals>
+							<goal>rest-request</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>com.axway</groupId>
+				<artifactId>apigateway-deploy</artifactId>
+				<version>0.0.1-SNAPSHOT</version>
+				<configuration>
+					<projdeployPath>>/opt/Axway/API/apigateway/posix/bin/projdeploy</projdeployPath>
+					<host>10.129.62.75</host>
+					<port>8090</port>
+					<groupName>Optum_Dev_Bank</groupName>
+					<instanceName>Optum_Dev_Bank_GW</instanceName>
+					<username>admin</username>
+					<password>changeme</password>
+					<type>fed</type>
+				</configuration>
+				<executions>
+					<execution>
+						<phase>install</phase>
+						<goals>
+							<goal>deployFed</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+</project>
