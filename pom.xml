@@ -50,7 +50,7 @@
 				<artifactId>apigateway-deploy</artifactId>
 				<version>0.0.1-SNAPSHOT</version>
 				<configuration>
-					<projdeployPath>>/opt/Axway/API/apigateway/posix/bin/projdeploy</projdeployPath>
+					<projdeployPath>/opt/Axway/API/apigateway/posix/bin/projdeploy</projdeployPath>
 					<host>10.129.61.77</host>
 					<port>8090</port>
 					<groupName>Optum_Prod_HC</groupName>
