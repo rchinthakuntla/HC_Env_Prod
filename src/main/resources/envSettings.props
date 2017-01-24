@@ -50,3 +50,6 @@ env.WS.LocationService.Url=http://192.168.63.1:10080/services/LocationService
 
 #Certificate valiation settings
 env.CERT_EXPIRATION_DAYS=90
+
+# Cassandra Server Settings
+env.Cassandra.Url=10.129.62.75
